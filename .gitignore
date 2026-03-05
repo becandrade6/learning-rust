@@ -1,0 +1,21 @@
+# Build artifacts
+target/
+**/target/
+
+# Cargo lock (para projetos de estudo, pode optar por commitar ou ignorar)
+Cargo.lock
+
+# Arquivos gerados pelo sistema
+.DS_Store
+Thumbs.db
+
+# IDEs e editores
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Arquivos de ambiente
+.env
+*.env.local
