@@ -1,6 +1,7 @@
-# Build artifacts
+# Rust
 target/
 **/target/
+**/*.rs.bk
 
 # Arquivos gerados pelo sistema
 .DS_Store
@@ -16,3 +17,8 @@ Thumbs.db
 # Arquivos de ambiente
 .env
 *.env.local
+
+# Obsidian
+notes/.obsidian/workspace.json
+notes/.obsidian/workspace-mobile.json
+notes/.obsidian/cache
