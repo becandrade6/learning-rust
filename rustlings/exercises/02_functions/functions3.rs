@@ -6,5 +6,6 @@ fn call_me(num: u8) {
 
 fn main() {
     // TODO: Fix the function call.
-    call_me();
+    let number = 10;
+    call_me(number);
 }
