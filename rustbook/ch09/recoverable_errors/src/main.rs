@@ -1,6 +1,7 @@
 use std::f32::consts::E;
-use std::fs::File;
+use std::fs::{self, File};
 use std::io::{self, Read, ErrorKind};
+user std::fs;
 
 fn main() {
 
@@ -50,4 +51,27 @@ fn read_username_from_file() -> Result<String, io::Error> {
         Ok(_) => Ok(username),
         Err(e) => Err(e),
     }
+}
+
+// this performs the same as the function above, but using the '?' operator
+fn read_username_from_file2() -> Result<String, io::Error> {
+    let mut username_file = File::open("hello.txt")?;
+    let mut username = String::new();
+
+    username_file.read_to_string(&mut username)?;
+    Ok(username)
+}
+
+// an even shorter version of the function above
+fn read_username_from_file3() -> Result<String, io::Error> {
+    let mut username = String::new();
+
+    File::open("hello.txt")?.read_to_string(&mut username)?;
+
+    Ok(username)
+}
+
+// an even even shorter version of the function above, using the fs::read_to_string
+fn read_username_from_file4() -> Result<String, io::Error> {
+    fs::read_to_string("hello.txt")
 }
