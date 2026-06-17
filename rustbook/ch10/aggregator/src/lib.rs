@@ -62,13 +62,55 @@ pub fn notify_3<T: Summary>(item1: &T, item2: &T){
     println!("Breaking news! {} {}", item1.summarize(), item2.summarize());
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+use::std::fmt::Display;
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+// we can specify more than one trait bound also
+// the item here must implement both Display and Summary traits
+pub fn notify_4<T: Summary + Display>(item1: &T, item2: &T){
+    println!("Breaking news! {} {}", item1.summarize(), item2.summarize());
+}
+
+// we can also use a where clause, to keep syntax clearer
+pub fn notify_5<T>(item1: &T, item2: &T)
+where
+    T: Summary + Display,
+{
+    println!("Breaking news! {} {}", item1.summarize(), item2.summarize());
+}
+
+// we can also use the impl Trait syntax in the return position to return a value of some type that implements a trait
+fn returns_summarizable() -> impl Summary {
+    SocialPost {
+        username: String::from("horse_ebooks"),
+        content: String::from(
+            "of course, as you probably already know, people",
+        ),
+        reply: false,
+        repost: false,
     }
 }
+
+struct Pair<T> {
+    x: T,
+    y: T,
+}
+
+impl<T> Pair<T> {
+    fn new(x: T, y: T) -> Self {
+        Self{ x, y}
+    }
+}
+
+// here we implement the cmp_display only if its inner
+// type T implements the PartialOrd trait that enables comparison
+// and the Display trait that enables printing
+impl<T:Display + PartialOrd> Pair<T> {
+    fn cmp_display(&self) {
+        if self.x >= self.y {
+            println!("The largest member is x = {}", self.x);
+        } else {
+            println!("The largest member is y = {}", self.y);
+        }
+    }
+}
+
